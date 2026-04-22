@@ -20,6 +20,14 @@ public class StoreApp {
                 5- Quit the application
                 Enter command:
                 """);
+        int userCommand = theScanner.nextInt();
+        //different inputs for users
+        switch(userCommand){
+            case 1:
+                displayInventory();
+                break;
+
+        }
     }
 
         //method to create values for the array
