@@ -26,6 +26,9 @@ public class StoreApp {
             case 1:
                 displayInventory();
                 break;
+            case 2:
+                searchById();
+                break;
 
         }
     }
@@ -61,6 +64,20 @@ public class StoreApp {
 
             Product product = inventoryList.get(i);
             System.out.printf("%s %s cost $%.2f \n", product.getId(), product.getName(), product.getPrice());
+        }
+
+
+    }
+    public static void searchById() throws IOException {
+        ArrayList<Product> list = getInventory();
+        //DISPLAY THE PRODUCTS AND THEIR IDS FOR USER
+
+        System.out.println("Enter the Products ID here: ");
+        int prodId = theScanner.nextInt();
+        for(Product p : list){
+            if(p.getId() == prodId){
+                System.out.println(p.getId() + " " + p.getName());
+            }
         }
 
     }
