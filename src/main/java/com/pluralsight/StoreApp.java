@@ -3,21 +3,23 @@ package com.pluralsight;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class StoreApp {
+    public static Scanner theScanner = new Scanner(System.in);
     public static void main(String[] args) throws IOException {
-        //creating inveotry arraylist
-        ArrayList<Product> inventoryList = getInventory();
-
-        System.out.println("----Inventory List----");
-        //looping through array
-        for(int i = 0; i < inventoryList.size(); i++){
-
-            Product product = inventoryList.get(i);
-            System.out.printf("%s %s cost $%.2f \n", product.getId(), product.getName(), product.getPrice());
-        }
+        System.out.println("---Welcome to our store!---");
+        //create menu for user
+        System.out.println("""
+                What do you want to do?
+                1- List all products
+                2- Lookup a product by its id
+                3- Find all products within a price range
+                4- Add a new product
+                5- Quit the application
+                Enter command:
+                """);
     }
 
         //method to create values for the array
@@ -39,6 +41,19 @@ public class StoreApp {
             throw new RuntimeException(e);
         }
 
+
+    }
+
+    public static void displayInventory() throws IOException {
+        ArrayList<Product> inventoryList = getInventory();
+
+        System.out.println("----Inventory List----");
+        //looping through array
+        for(int i = 0; i < inventoryList.size(); i++){
+
+            Product product = inventoryList.get(i);
+            System.out.printf("%s %s cost $%.2f \n", product.getId(), product.getName(), product.getPrice());
+        }
 
     }
 }
