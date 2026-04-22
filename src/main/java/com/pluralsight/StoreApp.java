@@ -1,13 +1,21 @@
 package com.pluralsight;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class StoreApp {
     public static void main(String[] args) {
+        //creating inveotry arraylist
+        ArrayList<Product> inventoryList = getInventory();
 
+        System.out.println("----Inventory List----");
+        //looping through array
+        for(int i = 0; i < inventoryList.size(); i++){
+            System.out.println(inventoryList.get(i).getName());
+        }
     }
-
-    public static ArrayList<Product> getInvenotry(){
+        //method to create values for the array
+    public static ArrayList<Product> getInventory(){
         ArrayList<Product> inventory = new ArrayList<Product>();
 
         inventory.add(new Product(1, "football" , 50.00));
