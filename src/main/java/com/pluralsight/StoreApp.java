@@ -17,5 +17,6 @@ public class StoreApp {
         inventory.add(new Product(5, "soccer ball" , 30.00));
 
         return inventory;
+
     }
 }
