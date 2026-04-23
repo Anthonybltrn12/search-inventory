@@ -1,8 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -47,8 +45,10 @@ public class StoreApp {
                     break;
                 case 4:
                     addProduct();
-                    displayInventory();
                     Thread.sleep(1000);
+                    break;
+                case 5:
+                    isRunning = false;
                     break;
 
             }
@@ -152,13 +152,31 @@ public class StoreApp {
 
     public static void addProduct() throws IOException {
         ArrayList<Product> inventoryList = getInventory();
-        System.out.println("What is the Name of your product? :");
-        String productName = theScanner.nextLine();
-        theScanner.nextLine();
+
         System.out.println("What is the ID of your product? Ex:1111 :");
         int productId = theScanner.nextInt();
+        theScanner.nextLine();
+        System.out.println("What is the Name of your product? :");
+        String productName = theScanner.nextLine();
         System.out.println("What is the price of your product? :");
         double productPrice = theScanner.nextDouble();
-        inventoryList.add(new Product(productId, productName, productPrice));
+
+        try{
+            FileWriter fileWriter = new FileWriter("src/main/resources/inventory.csv", true);
+            BufferedWriter buffWriter = new BufferedWriter(fileWriter);
+
+            Product newProduct = new Product(productId, productName, productPrice);
+            inventoryList.add(newProduct);
+            String newLine = String.format("\n%d|%s|%.2f", newProduct.getId(), newProduct.getName(), newProduct.getPrice());
+            buffWriter.write(newLine);
+            buffWriter.close();
+
+        }catch(Exception e){
+            System.out.println("Couldnt add product");
+
+        }
+
+
+
     }
 }
