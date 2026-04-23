@@ -10,6 +10,11 @@ public class StoreApp {
     public static Scanner theScanner = new Scanner(System.in);
     public static void main(String[] args) throws IOException {
         System.out.println("---Welcome to our store!---");
+        menu();
+
+    }
+
+    public static void menu() throws IOException {
         //create menu for user
         System.out.println("""
                 What do you want to do?
@@ -21,17 +26,21 @@ public class StoreApp {
                 Enter command:
                 """);
         int userCommand = theScanner.nextInt();
-        //different inputs for users
-        switch(userCommand){
-            case 1:
-                displayInventory();
-                break;
-            case 2:
-                searchById();
-                break;
-            case 3:
-                priceRange();
+        boolean isRunning = true;
+        while(isRunning = true;) {
+            //different inputs for users
+            switch (userCommand) {
+                case 1:
+                    displayInventory();
+                    isRunning = false; //trying to get app to return to menu after display method finishes
+                    break;
+                case 2:
+                    searchById();
+                    break;
+                case 3:
+                    priceRange();
 
+            }
         }
     }
 
@@ -50,9 +59,12 @@ public class StoreApp {
             }
 
             return inventory;
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
 
 
     }
@@ -86,7 +98,7 @@ public class StoreApp {
 
     public static void priceRange() throws IOException {
         ArrayList<Product> inventoryList = getInventory();
-
+        // asking for a price range from user
         System.out.println("""
                 What price range are you looking for? 
                 1: Under $10
@@ -95,9 +107,10 @@ public class StoreApp {
                 4: Over $60 
                 """);
         int userPR = theScanner.nextInt();
+        //looping through the products
         for(int i = 0; i < inventoryList.size(); i++){
             Product product = inventoryList.get(i);
-            switch(userPR){
+            switch(userPR){    //storing correct products for price range depending on the users response
                 case 1:
                     if(product.getPrice() <= 10) {
                         System.out.println(product.getName() + " " + product.getPrice());
