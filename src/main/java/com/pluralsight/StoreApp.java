@@ -15,7 +15,7 @@ public class StoreApp {
     public static void menu() throws IOException, InterruptedException {
         //create menu for user
         boolean isRunning = true;
-        while(isRunning = true) {
+        while(isRunning) {
         System.out.println("""
                 What do you want to do?
                 1- List all products
@@ -49,7 +49,7 @@ public class StoreApp {
                     break;
                 case 5:
                     isRunning = false;
-                    break;
+
 
             }
         }
@@ -152,7 +152,7 @@ public class StoreApp {
 
     public static void addProduct() throws IOException {
         ArrayList<Product> inventoryList = getInventory();
-
+        // asking user for product elements
         System.out.println("What is the ID of your product? Ex:1111 :");
         int productId = theScanner.nextInt();
         theScanner.nextLine();
@@ -167,6 +167,7 @@ public class StoreApp {
 
             Product newProduct = new Product(productId, productName, productPrice);
             inventoryList.add(newProduct);
+            //adding the product to the csv file
             String newLine = String.format("\n%d|%s|%.2f", newProduct.getId(), newProduct.getName(), newProduct.getPrice());
             buffWriter.write(newLine);
             buffWriter.close();
