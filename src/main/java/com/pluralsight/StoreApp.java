@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class StoreApp {
@@ -68,7 +69,8 @@ public class StoreApp {
                 String[] productArray = productLine.split("\\|");
                 inventory.add(new Product(Integer.parseInt(productArray[0]), productArray[1], Double.parseDouble(productArray[2])));
             }
-
+            //sorting the products by the name alphabetically
+            inventory.sort(Comparator.comparing(Product::getName));
             return inventory;
 
         } catch (Exception e) {
