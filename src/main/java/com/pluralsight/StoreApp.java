@@ -8,14 +8,16 @@ import java.util.Scanner;
 
 public class StoreApp {
     public static Scanner theScanner = new Scanner(System.in);
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println("---Welcome to our store!---");
         menu();
 
     }
 
-    public static void menu() throws IOException {
+    public static void menu() throws IOException, InterruptedException {
         //create menu for user
+        boolean isRunning = true;
+        while(isRunning = true) {
         System.out.println("""
                 What do you want to do?
                 1- List all products
@@ -26,19 +28,28 @@ public class StoreApp {
                 Enter command:
                 """);
         int userCommand = theScanner.nextInt();
-        boolean isRunning = true;
-        while(isRunning = true;) {
+
+
             //different inputs for users
             switch (userCommand) {
                 case 1:
                     displayInventory();
-                    isRunning = false; //trying to get app to return to menu after display method finishes
+                    Thread.sleep(1000);
+                     //trying to get app to return to menu after display method finishes
                     break;
                 case 2:
                     searchById();
+                    Thread.sleep(1000);
                     break;
                 case 3:
                     priceRange();
+                    Thread.sleep(1000);
+                    break;
+                case 4:
+                    addProduct();
+                    displayInventory();
+                    Thread.sleep(1000);
+                    break;
 
             }
         }
@@ -78,6 +89,7 @@ public class StoreApp {
 
             Product product = inventoryList.get(i);
             System.out.printf("%s %s cost $%.2f \n", product.getId(), product.getName(), product.getPrice());
+
         }
 
 
@@ -136,5 +148,17 @@ public class StoreApp {
         }
 
 
+    }
+
+    public static void addProduct() throws IOException {
+        ArrayList<Product> inventoryList = getInventory();
+        System.out.println("What is the Name of your product? :");
+        String productName = theScanner.nextLine();
+        theScanner.nextLine();
+        System.out.println("What is the ID of your product? Ex:1111 :");
+        int productId = theScanner.nextInt();
+        System.out.println("What is the price of your product? :");
+        double productPrice = theScanner.nextDouble();
+        inventoryList.add(new Product(productId, productName, productPrice));
     }
 }
