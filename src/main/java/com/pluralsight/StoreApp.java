@@ -29,6 +29,8 @@ public class StoreApp {
             case 2:
                 searchById();
                 break;
+            case 3:
+                priceRange();
 
         }
     }
@@ -79,6 +81,47 @@ public class StoreApp {
                 System.out.println(p.getId() + " " + p.getName());
             }
         }
+
+    }
+
+    public static void priceRange() throws IOException {
+        ArrayList<Product> inventoryList = getInventory();
+
+        System.out.println("""
+                What price range are you looking for? 
+                1: Under $10
+                2: Under $30
+                3: Under $60
+                4: Over $60 
+                """);
+        int userPR = theScanner.nextInt();
+        for(int i = 0; i < inventoryList.size(); i++){
+            Product product = inventoryList.get(i);
+            switch(userPR){
+                case 1:
+                    if(product.getPrice() <= 10) {
+                        System.out.println(product.getName() + " " + product.getPrice());
+                    }
+                    break;
+                case 2:
+                    if(product.getPrice() > 10 && product.getPrice() <= 30){
+                        System.out.println(product.getName() + " " + product.getPrice());
+                    }
+                    break;
+                case 3:
+                    if(product.getPrice() > 30 && product.getPrice() <= 60){
+                        System.out.println(product.getName() + " " + product.getPrice());
+                    }
+                    break;
+                case 4:
+                    if(product.getPrice() > 60){
+                        System.out.println(product.getName() + " " + product.getPrice());
+                    }
+                    break;
+            }
+
+        }
+
 
     }
 }
